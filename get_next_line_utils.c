@@ -6,7 +6,7 @@
 /*   By: mrahmat- <mrahmat-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:02:55 by mrahmat-          #+#    #+#             */
-/*   Updated: 2024/05/27 16:17:18 by mrahmat-         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:45:28 by mrahmat-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	unsigned int	new_i;
 	char			*new;
 
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
 	s1_i = 0;
 	s2_i = 0;
 	new_i = 0;
