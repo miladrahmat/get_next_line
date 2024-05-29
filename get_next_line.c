@@ -6,13 +6,13 @@
 /*   By: mrahmat- <mrahmat-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:17:14 by mrahmat-          #+#    #+#             */
-/*   Updated: 2024/05/28 20:01:10 by mrahmat-         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:50:30 by mrahmat-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static void	*ft_free(char **str)
+static char	*ft_free(char **str)
 {
 	if (*str != NULL)
 	{
@@ -22,20 +22,57 @@ static void	*ft_free(char **str)
 	return (NULL);
 }
 
+static int	check_fd(int fd, char **remainder)
+{
+	if (fd < 0 || read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0)
+	{
+		if (remainder != NULL)
+			ft_free(remainder);
+		return (0);
+	}
+	return (1);
+}
+
+static char	*handle_remainder(char *current, char **remainder)
+{
+	size_t	len;
+	size_t	len_nl;
+	char	*result;
+
+	result = NULL;
+	len = ft_strlen(current);
+	if (len == 0)
+		return (ft_free(&current));
+	len_nl = ft_strlen_nl(current);
+	if (len != len_nl)
+	{
+		*remainder = ft_substr(current, len_nl + 1, len - len_nl - 1);
+		if (*remainder == NULL)
+			return (ft_free(&current));
+		result = ft_substr(current, 0, len_nl + 1);
+		if (result == NULL)
+		{
+			ft_free(remainder);
+			return (ft_free(&current));
+		}
+		ft_free(&current);
+	}
+	if (current != NULL)
+		return (current);
+	return (result);
+}
+
 static char	*read_line(int fd, char *result)
 {
-	char	*buffer;
+	char	buffer[BUFFER_SIZE + 1];
 	char	*temp;
 	ssize_t	check;
 
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (buffer == NULL)
-		return (NULL);
 	while (ft_strchr(result, '\n') == 0)
 	{
 		check = read(fd, buffer, BUFFER_SIZE);
 		if (check == -1)
-			return (ft_free(&buffer));
+			return (NULL);
 		if (check == 0)
 			break ;
 		buffer[check] = '\0';
@@ -43,9 +80,8 @@ static char	*read_line(int fd, char *result)
 		result = ft_strjoin(result, buffer);
 		ft_free(&temp);
 		if (result == NULL)
-			return (ft_free(&buffer));
+			return (NULL);
 	}
-	ft_free(&buffer);
 	return (result);
 }
 
@@ -53,25 +89,13 @@ char	*get_next_line(int fd)
 {
 	static char		*remainder;
 	char			*line;
-	char			*temp;
-	size_t			len;
-	size_t			len_nl;
 
-	if (fd < 0 || read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0)
-	{
-		if (remainder != NULL)
-			ft_free(&remainder);
+	if (check_fd(fd, &remainder) == 0)
 		return (NULL);
-	}
-	line = (char *)malloc(1 * sizeof(char));
-	if (line == NULL)
-		return (NULL);
-	*line = '\0';
+	line = NULL;
 	if (remainder != NULL)
 	{
-		temp = line;
 		line = ft_strjoin(line, remainder);
-		ft_free(&temp);
 		ft_free(&remainder);
 		if (line == NULL)
 			return (NULL);
@@ -80,20 +104,10 @@ char	*get_next_line(int fd)
 	if (line == NULL)
 	{
 		if (remainder != NULL)
-			return (ft_free(&remainder));
-		return (NULL);
-	}
-	len = ft_strlen(line);
-	if (len == 0)
+			ft_free(&remainder);
 		return (ft_free(&line));
-	len_nl = ft_strlen_nl(line);
-	if (len != len_nl)
-	{
-		remainder = ft_substr(line, len_nl + 1, len - len_nl - 1);
-		if (remainder == NULL)
-			return (ft_free(&line));
-		line[len_nl + 1] = '\0';
 	}
+	line = handle_remainder(line, &remainder);
 	return (line);
 }
 /* 
@@ -107,7 +121,7 @@ int	main()
 
 	fd = open("test.txt", O_RDONLY);
 	lines = 0;
-	while (lines < 3)
+	while (lines < 1)
 	{
 		line = get_next_line(fd);
 		printf("%s", line);

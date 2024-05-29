@@ -6,7 +6,7 @@
 /*   By: mrahmat- <mrahmat-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:02:55 by mrahmat-          #+#    #+#             */
-/*   Updated: 2024/05/28 16:45:28 by mrahmat-         ###   ########.fr       */
+/*   Updated: 2024/05/29 15:20:19 by mrahmat-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strchr(const char *s, int c)
 	unsigned int	i;
 	char			*ptr;
 
+	if (s == NULL)
+		return (0);
 	i = 0;
 	while (s[i] != '\0')
 	{
@@ -37,15 +39,15 @@ char	*ft_strchr(const char *s, int c)
 		return (0);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char const *s2)
 {
 	unsigned int	s1_i;
 	unsigned int	s2_i;
 	unsigned int	new_i;
 	char			*new;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
+	if (s1 == NULL)
+		s1 = "";
 	s1_i = 0;
 	s2_i = 0;
 	new_i = 0;
