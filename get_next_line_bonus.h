@@ -6,16 +6,16 @@
 /*   By: mrahmat- <mrahmat-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 10:13:56 by mrahmat-          #+#    #+#             */
-/*   Updated: 2024/05/30 12:43:29 by mrahmat-         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:25:46 by mrahmat-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
+# define MAX_FD 1024
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <limits.h>
 
 char	*get_next_line(int fd);
 char	*ft_strchr(const char *s, int c);

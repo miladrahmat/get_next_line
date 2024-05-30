@@ -6,12 +6,13 @@
 /*   By: mrahmat- <mrahmat-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:17:33 by mrahmat-          #+#    #+#             */
-/*   Updated: 2024/05/30 12:43:16 by mrahmat-         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:26:12 by mrahmat-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+# define MAX_FD 1024
 
 # include <stdlib.h>
 # include <unistd.h>

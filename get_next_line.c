@@ -6,7 +6,7 @@
 /*   By: mrahmat- <mrahmat-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:17:14 by mrahmat-          #+#    #+#             */
-/*   Updated: 2024/05/30 13:46:33 by mrahmat-         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:27:02 by mrahmat-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*ft_free(char **str)
 
 static int	check_fd(int fd, char **remainder)
 {
-	if (fd < 0 || read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
+	if (fd < 0 || read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0 || fd > MAX_FD)
 	{
 		if (remainder != NULL)
 			ft_free(remainder);
