@@ -6,7 +6,7 @@
 /*   By: mrahmat- <mrahmat-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 10:16:00 by mrahmat-          #+#    #+#             */
-/*   Updated: 2024/05/30 15:27:26 by mrahmat-         ###   ########.fr       */
+/*   Updated: 2024/05/31 09:41:54 by mrahmat-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,33 +110,3 @@ char	*get_next_line(int fd)
 	line = handle_remainder(line, &remainder[fd]);
 	return (line);
 }
-/* 
-#include <stdio.h>
-#include <fcntl.h>
-int	main()
-{
-	int		fd;
-	int		fd1;
-	int		fd2;
-	int		lines;
-	char	*line;
-
-	fd = open("test.txt", O_RDONLY);
-	fd1 = open("test1.txt", O_RDONLY);
-	fd2 = open("test2.txt", O_RDONLY);
-	lines = 0;
-	while (lines < 7)
-	{
-		line = get_next_line(fd);
-		printf("%s", line);
-		free(line);
-		line = get_next_line(fd1);
-		printf("%s", line);
-		free(line);
-		line = get_next_line(fd2);
-		printf("%s", line);
-		free(line);
-		lines++;
-	}
-	return (0);
-} */
