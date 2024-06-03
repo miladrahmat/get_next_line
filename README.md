@@ -1,5 +1,13 @@
 # get_next_line
-**The goal of this project is to add a convenient function to your collection and learn about static variables**
+
+<p align="center">
+	<img src="https://github.com/miladrahmat/42-badges/blob/master/badges/get_next_linem.png"><img width="144" alt="Screen Shot 2024-06-03 at 11 51 11 AM" src="https://github.com/miladrahmat/get_next_line/assets/159012803/e2845992-6cbf-4652-b4fc-c7c895a8f3e9">
+
+</p>
+
+<p align="center">
+	<b>The goal of this project is to add a convenient function to your collection and learn about static variables</b>
+</p>
 
 ## Content
 
